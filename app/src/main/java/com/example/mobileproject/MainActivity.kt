@@ -1,5 +1,6 @@
 package com.example.mobileproject
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
@@ -23,8 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         _binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = "MobileProject-Login" ;
 
-
+        //change facebook btn color after clicking
        binding.facebook.setOnClickListener {
            val color = Random()
            binding.facebook.setBackgroundColor(
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
            )
 
        }
+        //change google btn color after clicking
         binding.google.setOnClickListener {
             val color = Random()
             binding.google.setBackgroundColor(
@@ -49,13 +52,20 @@ class MainActivity : AppCompatActivity() {
             )
             Log.d("TAG",binding.emailInput.editText!!.text.toString())
         }
+        //Login btn click function
         binding.nextButton.setOnClickListener {
-            if (!isValidEmail(binding.emailInput.editText!!.text.toString()))
+            if (!isValidEmail(binding.emailInput.editText!!.text.toString())) //validate email
                 binding.emailInput.error="Wrong format"
             else {
                 binding.emailInput.error=""
                 Toast.makeText(this@MainActivity, "Login successful", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        //redirect to signup page
+        binding.signupText.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            startActivity(intent)
         }
 
     }
